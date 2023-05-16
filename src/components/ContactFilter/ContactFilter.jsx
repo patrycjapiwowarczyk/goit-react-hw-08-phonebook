@@ -1,29 +1,51 @@
-import React from 'react';
-import css from './ContactFilter.module.css';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { setSearchTerm } from 'redux/slice';
+import { setSearchTerm } from 'redux/contactsSlice';
+import { TextField, Container, Box, Collapse, Button } from '@mui/material';
 
 export const ContactFilter = () => {
+  const [showFilter, setShowFilter] = useState(false);
   const dispatch = useDispatch();
+  const inputRef = useRef();
 
-  const handleChange = event => {
-    dispatch(setSearchTerm(event.target.value));
+  useEffect(() => {
+    if (showFilter) {
+      inputRef.current.focus();
+    }
+  }, [showFilter]);
+
+  const handleInputChange = e => {
+    dispatch(setSearchTerm(e.target.value));
   };
 
   return (
-    <div className={css['filter']}>
-      <label className={css['filter__container']}>
-        <p>Find contacts by name:</p>
-        <input
-          className={css['filter__input']}
-          type="text"
-          name="name"
-          onChange={event => handleChange(event)}
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-        ></input>
-      </label>
-    </div>
+    <Container maxWidth="sm">
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => setShowFilter(!showFilter)}
+        sx={{ mt: 4 }}
+        fullWidth
+      >
+        {showFilter ? 'Hide Search' : 'Search'}
+      </Button>
+      <Collapse in={showFilter} timeout={300}>
+        <Box sx={{ mt: 2 }}>
+          <TextField
+            label="Find contacts by name"
+            variant="outlined"
+            fullWidth
+            inputRef={inputRef}
+            inputProps={{
+              pattern:
+                "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
+              title:
+                "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan",
+            }}
+            onChange={handleInputChange}
+          />
+        </Box>
+      </Collapse>
+    </Container>
   );
 };

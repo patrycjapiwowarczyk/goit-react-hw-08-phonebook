@@ -1,36 +1,112 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import css from './ContactListItem.module.css';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { deletingContact } from 'redux/slice';
+import {
+  deleteContact,
+  updateContact,
+  fetchContacts,
+} from 'redux/contactsSlice';
+import {
+  ListItem,
+  ListItemText,
+  Button,
+  ListItemSecondaryAction,
+  Collapse,
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import EditContactDialog from '../EditContactDialog/EditContactDialog';
 
-export const ContactListItem = ({ contact }) => {
+function ContactListItem({ contact }) {
   const dispatch = useDispatch();
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const isInitialRender = useRef(true);
 
-  const handleClick = () => {
-    dispatch(deletingContact(contact.id));
+  useEffect(() => {
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+      setIsExpanded(true);
+    }
+  }, []);
+
+  const handleDelete = () => {
+    setIsExpanded(false);
+    setTimeout(() => {
+      dispatch(deleteContact(contact.id));
+    }, 300);
+  };
+
+  const handleEdit = () => {
+    setEditDialogOpen(true);
+  };
+
+  const handleUpdateSubmit = (updatedName, updatedNumber) => {
+    setIsExpanded(false);
+    setTimeout(() => {
+      dispatch(
+        updateContact({
+          contactId: contact.id,
+          contactData: { name: updatedName, number: updatedNumber },
+        })
+      ).then(() => {
+        dispatch(fetchContacts());
+      });
+      setIsExpanded(true);
+    }, 300);
+    setEditDialogOpen(false);
   };
 
   return (
-    <li key={contact.id} className={css['contact-list__item']}>
-      <p>
-        {contact.name}: {contact.phone}
-      </p>
-      <button
-        className={css['contact-list__button']}
-        type="button"
-        onClick={handleClick}
-      >
-        <b>X</b>
-      </button>
-    </li>
+    <>
+      <Collapse in={isExpanded}>
+        <ListItem>
+          <ListItemText primary={contact.name} secondary={contact.number} />
+          <ListItemSecondaryAction>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleEdit}
+              sx={{
+                minWidth: 48,
+                minHeight: 48,
+                mr: 1,
+                borderRadius: 1,
+              }}
+            >
+              <EditIcon />
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={handleDelete}
+              sx={{
+                minWidth: 48,
+                minHeight: 48,
+                borderRadius: 1,
+              }}
+            >
+              <DeleteIcon />
+            </Button>
+          </ListItemSecondaryAction>
+        </ListItem>
+      </Collapse>
+      <EditContactDialog
+        open={editDialogOpen}
+        onClose={() => setEditDialogOpen(false)}
+        contact={contact}
+        onUpdate={handleUpdateSubmit}
+      />
+    </>
   );
-};
+}
 
 ContactListItem.propTypes = {
   contact: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
+    id: PropTypes.any,
+    name: PropTypes.any,
+    number: PropTypes.any,
   }),
 };
+
+export default ContactListItem;

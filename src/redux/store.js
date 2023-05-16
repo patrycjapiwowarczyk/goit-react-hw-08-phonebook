@@ -1,10 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { contactsReducer } from './slice';
-import thunkMiddleware from 'redux-thunk';
+import authorizationReducer from './authorizationSlice';
+import userReducer from './userSlice';
+import contactsReducer from './contactsSlice';
+import notificationReducer from './notificationSlice';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
+    auth: authorizationReducer,
+    user: userReducer,
     contacts: contactsReducer,
+    notification: notificationReducer,
   },
-  middleware: [thunkMiddleware],
 });
+
+export default store;
