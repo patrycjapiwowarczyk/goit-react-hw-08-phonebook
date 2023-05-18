@@ -19,7 +19,7 @@ export const ContactFilter = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" sx={{ padding: '20px'}}>
       <Button
         variant="contained"
         color="primary"

@@ -21,7 +21,7 @@ function ContactList() {
 
   return (
     <Container maxWidth="sm">
-      <Box sx={{ mt: 3 }}>
+      <Box sx={{ mt: 3, color: 'black' }}>
         <List>
           {filteredContacts.length === 0 ? (
             <Typography variant="body1" align="center">

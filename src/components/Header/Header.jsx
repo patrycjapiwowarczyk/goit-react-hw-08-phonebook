@@ -14,13 +14,15 @@ const NavLink = React.forwardRef((props, ref) => (
     disableElevation
     sx={{
       '&.active': {
-        backgroundColor: 'primary.main',
+        backgroundColor: 'primary.hover',
         color: 'white',
         textDecoration: 'none',
+        border: 'none',
       },
       '&:hover': {
-        backgroundColor: 'primary.main',
+        backgroundColor: 'primary.hover',
         color: 'white',
+        border: 'none',
       },
       transition: 'background-color 250ms, color 250ms',
     }}

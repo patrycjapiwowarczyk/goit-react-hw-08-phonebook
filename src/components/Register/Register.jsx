@@ -29,15 +29,20 @@ const Register = () => {
         component="div"
         sx={{
           mt: 3,
-          color: 'black',
-          backgroundColor: '#B3B5B4',
+          color: 'white',
+          backgroundColor: 'rgba(32, 65, 61, 0.14)',
           padding: '35px',
         }}
       >
-        <Typography variant="h4">REGISTER</Typography>
+        <Typography sx={{
+              color: 'black'
+                    }} variant="h4">REGISTER</Typography>
         <form onSubmit={handleSubmit}>
           <Box mt={2}>
             <TextField
+            sx={{
+              backgroundColor: 'rgba(0, 0, 0, 0.14)'
+                    }}
               id="name"
               label="Name"
               type="text"
@@ -49,6 +54,9 @@ const Register = () => {
           </Box>
           <Box mt={2}>
             <TextField
+            sx={{
+              backgroundColor: 'rgba(0, 0, 0, 0.14)'
+                    }}
               id="email"
               label="Email"
               type="email"
@@ -60,6 +68,9 @@ const Register = () => {
           </Box>
           <Box mt={2}>
             <TextField
+            sx={{
+              backgroundColor: 'rgba(0, 0, 0, 0.14)'
+                    }}
               id="password"
               label="Password"
               type="password"
@@ -70,7 +81,9 @@ const Register = () => {
             />
           </Box>
           <Box mt={3}>
-            <Button type="submit" variant="contained">
+            <Button sx={{
+              backgroundColor: 'rgba(20, 121, 11, 0.623)'
+                    }} type="submit" variant="contained">
               Register
             </Button>
           </Box>

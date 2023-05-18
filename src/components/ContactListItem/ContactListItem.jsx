@@ -68,9 +68,9 @@ function ContactListItem({ contact }) {
               color="primary"
               onClick={handleEdit}
               sx={{
-                minWidth: 48,
-                minHeight: 48,
-                mr: 1,
+                width: 30,
+                height: 40,
+                mr: 2,
                 borderRadius: 1,
               }}
             >
@@ -81,8 +81,8 @@ function ContactListItem({ contact }) {
               color="error"
               onClick={handleDelete}
               sx={{
-                minWidth: 48,
-                minHeight: 48,
+                width: 30,
+                height: 40,
                 borderRadius: 1,
               }}
             >

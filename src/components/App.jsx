@@ -12,12 +12,16 @@ const Register = lazy(() => import('./Register/Register'));
 
 const pageTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: 'light',
     primary: {
       main: '#9CB3A9',
+      hover: 'rgba(255, 0, 0, 0.666)',
     },
     secondary: {
       main: '#000000',
+    },
+    black: {
+      main: 'black',
     },
     background: {
       default: '#FFFFFFF',

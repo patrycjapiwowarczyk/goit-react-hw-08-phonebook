@@ -26,15 +26,20 @@ const Login = () => {
         component="div"
         sx={{
           mt: 3,
-          color: 'black',
-          backgroundColor: '#C7C9C8',
+          color: 'white',
+          backgroundColor: 'rgba(32, 65, 61, 0.14)',
           padding: '35px',
         }}
       >
-        <Typography variant="h4">LOGIN</Typography>
+        <Typography sx={{
+              color: 'black'
+                    }} variant="h4" >LOGIN</Typography>
         <form onSubmit={handleSubmit}>
           <Box mt={2}>
             <TextField
+            sx={{
+      backgroundColor: 'rgba(0, 0, 0, 0.14)',
+            }}
               id="email"
               label="Email"
               type="email"
@@ -42,11 +47,14 @@ const Login = () => {
               onChange={e => setEmail(e.target.value)}
               fullWidth
               required
-              color="secondary"
+              color="primary"
             />
           </Box>
           <Box mt={2}>
             <TextField
+            sx={{
+              backgroundColor: 'rgba(0, 0, 0, 0.14)'
+                    }}
               id="password"
               label="Password"
               type="password"
@@ -57,7 +65,9 @@ const Login = () => {
             />
           </Box>
           <Box mt={3}>
-            <Button type="submit" variant="contained">
+            <Button sx={{
+              backgroundColor: 'rgba(20, 121, 11, 0.623)'
+                    }} type="submit" variant="contained">
               Login
             </Button>
           </Box>

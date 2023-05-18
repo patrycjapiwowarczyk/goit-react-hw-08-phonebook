@@ -53,7 +53,7 @@ function ContactForm() {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" sx={{ padding: '20px'}}>
       <Button
         variant="contained"
         color="primary"
@@ -64,9 +64,10 @@ function ContactForm() {
         {showForm ? 'Hide Form' : 'New Contact'}
       </Button>
       <Collapse in={showForm} timeout={300}>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3}}>
           <FormControl fullWidth>
             <TextField
+            color="black"
               label="Name"
               variant="outlined"
               type="text"
